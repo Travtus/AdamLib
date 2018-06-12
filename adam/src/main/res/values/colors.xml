@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#00ADEF</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#00ADEF</color>
+
+    <color name="adam_blue">#41A3DC</color>
+    <color name="adam_dark_blue">#0B79B9</color>
+    <color name="adam_green">#53B999</color>
+
+    <color name="white_color">#ffffff</color>
+    <color name="dark_white">#F5F5F5</color>
+    <color name="white_background">#F9F9F9</color>
+    <color name="grey_hint">#CDCED2</color>
+    <color name="grey_text">#837F7F</color>
+    <color name="black">#000000</color>
+
+</resources>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <RelativeLayout
+        android:id="@+id/incoming_message_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/adam_response"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/adam_blue_bubble"
+            android:layout_marginLeft="8dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:textColor="@color/white_color"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="6dp"
+            android:src="@drawable/adam_large"
+            android:layout_alignBottom="@+id/adam_response"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/suggestions_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adam_response"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/carousel_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/suggestions_list"
+            android:layout_marginTop="15sp"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/cards_list_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/suggestions_list"
+            android:layout_marginTop="15sp"
+            android:orientation="vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="40dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/cards_list_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Schedule Tasks"
+                android:textSize="14sp"
+                android:background="@color/black"
+                android:textColor="@color/white_color"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="8dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/cards_list_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/outgoing_message_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/outgoing_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp">
+
+            <TextView
+                android:id="@+id/adam_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/adam_grey_bubble"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="30dp"
+                android:paddingTop="20dp"
+                android:textColor="@color/grey_text"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/adam_photo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/user_identifier"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/circle_adam_user"
+            android:layout_alignBottom="@+id/outgoing_data"
+            android:textSize="20sp"
+            android:textColor="@color/white_color"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
