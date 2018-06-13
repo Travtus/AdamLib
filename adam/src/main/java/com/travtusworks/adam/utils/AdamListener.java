@@ -20,8 +20,6 @@ public interface AdamListener {
 
     void sendMessage(String message);
 
-    void loadMore();
-
     void uploadImage(File file, String key, Uri uri);
 
     void showErrorMessage(String message);

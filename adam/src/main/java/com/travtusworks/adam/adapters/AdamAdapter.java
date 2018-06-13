@@ -1,8 +1,6 @@
-package com.travtusworks.adam.utils;
+package com.travtusworks.adam.adapters;
 
-import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,13 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+import com.travtusworks.adam.AdamActivity;
 import com.travtusworks.adam.R;
 import com.travtusworks.adam.api.MessageDAO;
+import com.travtusworks.adam.utils.AdamListener;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by teodora on 12.06.2018.
@@ -56,7 +54,78 @@ public class AdamAdapter extends RecyclerView.Adapter<AdamAdapter.CustomViewHold
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
 
+        MessageDAO message = messages.get(position);
 
+        if (message.getUserID() != currentUserID){
+            //incoming message
+            holder.incomingMessageLayout.setVisibility(View.VISIBLE);
+            holder.outgoingMessageLayout.setVisibility(View.GONE);
+            holder.adamResponse.setText(message.getMessage());
+
+            if (position == messages.size()-1) {
+
+                if (message.getSuggestions() != null && message.getSuggestions().size() > 0) {
+                    holder.suggestionsList.setVisibility(View.VISIBLE);
+                    SuggestionAdapter adapter = new SuggestionAdapter(context, listener, message.getSuggestions());
+                    holder.suggestionsList.setAdapter(adapter);
+                } else
+                    holder.suggestionsList.setVisibility(View.GONE);
+
+                if (message.getCards() != null && message.getCards().size() > 0){
+                    holder.carouselList.setVisibility(View.VISIBLE);
+                    CarouselAdapter adapter = new CarouselAdapter(context, listener, message.getCards());
+                    holder.carouselList.setAdapter(adapter);
+                } else {
+                    holder.carouselList.setVisibility(View.GONE);
+                }
+
+                if (message.getListCard() != null && message.getListCard().getItems().size() > 0){
+                    holder.cardsListLayout.setVisibility(View.VISIBLE);
+                    holder.cardsListTitle.setText(message.getListCard().getTitle());
+                    CardListAdapter adapter = new CardListAdapter(context, listener, message.getListCard().getItems());
+                    holder.cardsListItems.setAdapter(adapter);
+
+                } else {
+                    holder.cardsListLayout.setVisibility(View.GONE);
+                }
+
+            } else {
+                holder.suggestionsList.setVisibility(View.GONE);
+                holder.carouselList.setVisibility(View.GONE);
+                holder.cardsListLayout.setVisibility(View.GONE);
+            }
+
+        } else {
+            //outgoing message
+            holder.outgoingMessageLayout.setVisibility(View.VISIBLE);
+            holder.incomingMessageLayout.setVisibility(View.GONE);
+            holder.userIdentifier.setText(userLetter);
+            if (message.isImage()){
+                holder.adamText.setVisibility(View.GONE);
+                holder.adamPhoto.setVisibility(View.VISIBLE);
+                Picasso.with(context).load(message.getImageUri())
+                        .fit()
+                        .centerCrop()
+                        .into(holder.adamPhoto);
+            } else {
+                String messageText = message.getMessage();
+                if (messageText.startsWith("![](https://")){
+                    holder.adamText.setVisibility(View.GONE);
+                    holder.adamPhoto.setVisibility(View.VISIBLE);
+                    String url = messageText.substring(4,messageText.length()-1);
+                    Picasso.with(context).load(url)
+                            .fit()
+                            .centerCrop()
+                            .placeholder(R.drawable.default_image)
+                            .into(holder.adamPhoto);
+
+                } else {
+                    holder.adamPhoto.setVisibility(View.GONE);
+                    holder.adamText.setVisibility(View.VISIBLE);
+                    holder.adamText.setText(messageText);
+                }
+            }
+        }
 
     }
 
@@ -93,7 +162,7 @@ public class AdamAdapter extends RecyclerView.Adapter<AdamAdapter.CustomViewHold
             super(itemView);
 
             incomingMessageLayout = context.findViewById(R.id.incoming_message_layout);
-            adamResponse = context.findViewById(R.id.adam_response);
+            adamResponse = ((AdamActivity)context).findViewById(R.id.adam_response);
             suggestionsList = context.findViewById(R.id.suggestions_list);
             carouselList = context.findViewById(R.id.carousel_list);
             cardsListLayout = context.findViewById(R.id.cards_list_layout);

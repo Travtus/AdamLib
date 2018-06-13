@@ -16,7 +16,8 @@ import butterknife.ButterKnife;
 
 public class TestActivity extends AppCompatActivity {
 
-    private AdamButton adamButton;
+    @BindView(R.id.adam_button)
+    AdamButton adamButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,8 +27,9 @@ public class TestActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        adamButton = new AdamButton(this);
-
+        adamButton.setCompanyID(4);
+        adamButton.setUserID(17);
+        adamButton.setUserName("Teo");
 
     }
 }

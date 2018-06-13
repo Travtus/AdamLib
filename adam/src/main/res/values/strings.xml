@@ -7,8 +7,14 @@
     <string name="book_a_job">Book a Job</string>
     <string name="ask_adam">Ask Adam</string>
 
+    <string name="building_hint">\@ building</string>
+
     <string name="type_here">Type here</string>
+    <string name="next">Next</string>
+    <string name="ok">OK</string>
 
     <string name="network_error">There was an error. Please check your internet connection.</string>
+    <string name="photo_error">There was an error. Please try again.</string>
+    <string name="generic_error">An unexpected error has occurred. Please try again later.</string>
 
 </resources>
